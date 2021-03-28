@@ -21,9 +21,11 @@
     * Board
         * Object that instantiates a board to the specifications provided in the list parameter that is fed to it
     ---    
+- Rules
+    ---
+    * ![](./carrier_info.png)
+    * ![](./game_description.png)
+    
+---
 
-- To-Do:
-    - Combine remaining functions & classes into 3 classes
-    - Create Game class and begin playing the game with play/bot information on-hand
-    - Create function to restart the game if player chooses to do so
     

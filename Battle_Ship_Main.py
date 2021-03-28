@@ -1,25 +1,64 @@
 import os
 import random
 
-
 class Player_Info:
     def __init__(self):
-        self.player = welcome_create_player()
         self.player_ship_board = Board(Board.generate_board(10, 10, "O"))
         self.bot_ship_board = Board(Board.generate_board(10, 10, "O"))
+        self.bot_attack_board = Board(Board.generate_board(10, 10, "O"))
         self.player_attack_board = Board(Board.generate_board(10, 10, "O"))
+        os.system('cls' if os.name == 'nt' else 'clear')
+        self.player_name = input("Welcome to Terminal Battle-Ship, please provide a Player Name:")
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    def decide_first_turn(self):
+        return random.randrange(1, 3)
+
+    def choose_ship_location(self):
+        '''
+        Function that prompts the player for where they would like to place their 5 ships & returns a player board
+        with the ships placed & ready to play.
+
+
+        Carrier(5 spaces)
+        Battleship(4 spaces)
+        Cruiser(3 spaces)
+        Submarine(3 spaces)
+        Destroyer(2 spaces)
+        :return:
+        '''
+        ##TODO; Begin/finish writing choose_ship_location
+        pass
 
 class Game:
     def __init__(self):
         self.player_info = Player_Info()
-        self.player = self.player_info.player
-
+        self.first_turn = "Player" if self.player_info.decide_first_turn() == 1 else "Bot"
+        print(self.first_turn)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"Player name set to {self.player_info.player_name} & '{self.first_turn}' gets to go first!")
+        input("\n Press Enter")
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Setting up new Board...\n")
         print("Legend: \n O = Empty Space \n X = Occupied by Battle Ship \n ")
         print("-----Player Ship Board-----")
-        print(self.player_info.player_ship_board, "\n \n....Enter to continue.")
-        input()
+        if self.first_turn == "Player":
+            print(self.player_info.player_ship_board, f"\n \n....Enter to choose ship location & fire the first shot!")
+            input()
+        else:
+            print(self.player_info.player_ship_board, f"\n \n....Enter to choose ship location.")
+            input()
+
+
+
+    def play_game(self):
+        ##TODO; Begin writing play_game function under Game class
+        pass
+
+
+    def restart_game(self):
+        ##TODO; Begin working on restart_game function under Game class
+        pass
 
 
 class Board(list):
@@ -37,21 +76,8 @@ class Board(list):
     def __str__(self):
         return "\n".join(" ".join(row) for row in self)
 
-
-def decide_first_turn():
-    return random.randrange(1, 3)
-
-class welcome_create_player:
-    def __init__(self):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        self.player_name = input("Welcome to Terminal Battle-Ship, please provide a Player Name:")
-        os.system('cls' if os.name == 'nt' else 'clear')
-        self.first_turn = "Player" if decide_first_turn() == 1 else "Bot"
-        print(self.first_turn)
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"Player name set to {self.player_name} & '{self.first_turn}' gets to go first!")
-        input("\n Press Enter")
-
-
-
 Game()
+
+##TODO; Begin writing code to initiate, & play game using the classes above.
+
+
