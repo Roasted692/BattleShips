@@ -3,13 +3,14 @@ import random
 
 class Player_Info:
     def __init__(self):
-        self.player_ship_board = Board(Board.generate_board(10, 10, "O"))
-        self.bot_ship_board = Board(Board.generate_board(10, 10, "O"))
-        self.bot_attack_board = Board(Board.generate_board(10, 10, "O"))
-        self.player_attack_board = Board(Board.generate_board(10, 10, "O"))
+        self.player_ship_board = Board(10, 10, "O")
+        self.bot_ship_board = Board(10, 10, "O")
+        self.bot_attack_board = Board(10, 10, "O")
+        self.player_attack_board = Board(10, 10, "O")
         os.system('cls' if os.name == 'nt' else 'clear')
         self.player_name = input("Welcome to Terminal Battle-Ship, please provide a Player Name:")
         os.system('cls' if os.name == 'nt' else 'clear')
+
 
     def decide_first_turn(self):
         return random.randrange(1, 3)
@@ -43,11 +44,13 @@ class Game:
         print("Legend: \n O = Empty Space \n X = Occupied by Battle Ship \n ")
         print("-----Player Ship Board-----")
         if self.first_turn == "Player":
-            print(self.player_info.player_ship_board, f"\n \n....Enter to choose ship location & fire the first shot!")
+            print(self.player_info.player_ship_board.constructed_board(), f"\n \n....Enter to choose ship location & fire the first shot!")
             input()
+            print(self.player_info.player_ship_board.bare_board())
         else:
-            print(self.player_info.player_ship_board, f"\n \n....Enter to choose ship location.")
+            print(self.player_info.player_ship_board.constructed_board(), f"\n \n....Enter to choose ship location.")
             input()
+
 
 
 
@@ -63,6 +66,10 @@ class Game:
 
 class Board(list):
 
+    def __init__(self, x: int = 0, y: int = 0, character: str = "O"):
+        self.board = [[character] * x for _ in range(y)]
+
+
     def generate_board(x: int = 0, y: int = 0, character: str = "O"):
         '''
 
@@ -73,8 +80,11 @@ class Board(list):
         '''
         return [[character] * x for _ in range(y)]
 
-    def __str__(self):
-        return "\n".join(" ".join(row) for row in self)
+    def bare_board(self):
+        return self.board
+
+    def constructed_board(self):
+        return "\n".join(" ".join(row) for row in self.board)
 
 Game()
 
