@@ -15,21 +15,7 @@ class Player_Info:
     def decide_first_turn(self):
         return random.randrange(1, 3)
 
-    def choose_ship_location(self):
-        '''
-        Function that prompts the player for where they would like to place their 5 ships & returns a player board
-        with the ships placed & ready to play.
 
-
-        Carrier(5 spaces)
-        Battleship(4 spaces)
-        Cruiser(3 spaces)
-        Submarine(3 spaces)
-        Destroyer(2 spaces)
-        :return:
-        '''
-        ##TODO; Begin/finish writing choose_ship_location
-        pass
 
 class Game:
     def __init__(self):
@@ -41,22 +27,42 @@ class Game:
         input("\n Press Enter")
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Setting up new Board...\n")
-        print("Legend: \n O = Empty Space \n X = Occupied by Battle Ship \n ")
-        print("-----Player Ship Board-----")
-        if self.first_turn == "Player":
-            print(self.player_info.player_ship_board.constructed_board(), f"\n \n....Enter to choose ship location & fire the first shot!")
-            input()
-            print(self.player_info.player_ship_board.bare_board())
-        else:
-            print(self.player_info.player_ship_board.constructed_board(), f"\n \n....Enter to choose ship location.")
-            input()
-
-
+        input()
 
 
     def play_game(self):
         ##TODO; Begin writing play_game function under Game class
-        pass
+        print("Legend: \n O = Empty Space \n X = Occupied by Battle Ship\n")
+        print("-----Player Ship Board-----")
+        if self.first_turn == "Player":
+            self.player_info.player_ship_board.constructed_board()
+            print("\n \n....Enter to choose ship location & fire the first shot!")
+            input()
+            self.player_info.player_ship_board.bare_board()
+        else:
+            self.player_info.player_ship_board.constructed_board()
+            print("\n \n....Enter to choose ship location.")
+            input()
+            self.player_info.player_ship_board.bare_board()
+
+    def place_player_ships(self):
+        '''
+            Function that prompts the player for where they would like to place their 5 ships & returns a player board
+            with the ships placed & ready to play.
+
+
+            Carrier(5 spaces)
+            Battleship(4 spaces)
+            Cruiser(3 spaces)
+            Submarine(3 spaces)
+            Destroyer(2 spaces)
+            :return:
+        '''
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Using the board below as reference, place your ships via the prompts that appear.\n")
+        self.player_info.player_ship_board.constructed_board()
+        self.player_info.player_ship_board.place_carrier()
+        ##TODO; Create method for placing each of the 5 ships in the board class, run each method so player can have full board.
 
 
     def restart_game(self):
@@ -81,12 +87,41 @@ class Board(list):
         return [[character] * x for _ in range(y)]
 
     def bare_board(self):
-        return self.board
+        print(self.board)
+
 
     def constructed_board(self):
-        return "\n".join(" ".join(row) for row in self.board)
+        print("    A-B-C-D-E-F-G-H-I-J")
+        test = [" ".join(self.board[row]) for row in range(len(self.board))]
 
-Game()
+
+        ##for row in range(len(self.board)):
+            ##print(" ".join(self.board[row]))
+
+        for x in range(1,11):
+            if x == 10:
+                print(f"{x}- " + test[x-1])
+            else:
+                print(f"{x}-  " + test[x-1])
+
+
+    def convert_board_to_dict(self):
+
+        pass
+
+
+Game = Game()
+Game.play_game()
+
+
+
+
+
+##TODO; Turn current list that represents the board in dictionary so that the player & Bot can interact w/ it, function below
+
+
+
+
 
 ##TODO; Begin writing code to initiate, & play game using the classes above.
 
