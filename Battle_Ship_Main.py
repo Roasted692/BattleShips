@@ -62,6 +62,7 @@ class Game:
         print("Using the board below as reference, place your ships via the prompts that appear.\n")
         self.player_info.player_ship_board.constructed_board()
         self.player_info.player_ship_board.place_carrier()
+
         ##TODO; Create method for placing each of the 5 ships in the board class, run each method so player can have full board.
 
 
@@ -103,6 +104,15 @@ class Board(list):
                 print(f"{x}- " + test[x-1])
             else:
                 print(f"{x}-  " + test[x-1])
+
+    def place_carrier(self):
+        starting_spot = input("Provide a starting spot between any of the 10 spots on the board.")
+        ending_spot = input(f"Provide an endpoint that is within 5 spaces from the starting point selected {starting_spot}.")
+
+
+    def check_provided_spots(self):
+        pass
+
 
 
     def convert_board_to_dict(self):
