@@ -106,8 +106,22 @@ class Board(list):
                 print(f"{x}-  " + test[x-1])
 
     def place_carrier(self):
-        starting_spot = input("Provide a starting spot between any of the 10 spots on the board.")
-        ending_spot = input(f"Provide an endpoint that is within 5 spaces from the starting point selected {starting_spot}.")
+        starting_spot_letter = 1
+        while starting_spot_letter != str and len(starting_spot_letter) > 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            starting_spot_letter = input("Provide a starting spot letter between A-J")
+        starting_spot_number = "a"
+        while starting_spot_number != int and len(starting_spot_number) > 2:
+            starting_spot_number = input(f"Provide a starting number between 1-10. \nLetter selected:{starting_spot_letter}")
+        ending_spot_letter = 1
+        while ending_spot_letter != str and len(ending_spot_letter) > 1:
+            ending_spot_letter = input("Provide an ending letter between A-J")
+        ending_spot_number = "a"
+        while ending_spot_number != int and len(ending_spot_number) > 2:
+            ending_spot_number = input(f"Provide an ending number between 1-10. \nLetter selected: {ending_spot_letter}")
+
+        return {"starting_letter": starting_spot_letter, "starting_number": starting_spot_number, "ending_letter":ending_spot_letter, "ending_number":ending_spot_number}
+
 
 
     def check_provided_spots(self):
